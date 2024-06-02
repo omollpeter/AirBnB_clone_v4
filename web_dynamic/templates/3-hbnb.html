@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../static/styles/3-footer.css?{{ cache_id }}">
     <link rel="stylesheet" href="../static/styles/6-filters.css?{{ cache_id }}">
     <link rel="stylesheet" href="../static/styles/8-places.css?{{ cache_id }}">
-    <link rel="stylesheet" href="../static/styles/font-awesome.css?{{ cache_id }}">
+    <!-- <link rel="stylesheet" href="../static/styles/font-awesome.css?{{ cache_id }}"> -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="../static/scripts/3-hbnb.js?{{ cache_id }}"></script>
   </head>
@@ -33,7 +33,8 @@
     <!--HEADER section-->
 
     <header>
-      <div id="api_status"></div>
+		<div class="logo"></div>
+      	<div id="api_status"></div>
     </header>
     <main>
       <div class="container">
@@ -44,31 +45,37 @@
 
 	  <!-- location section -->
 
-	  <div class="locations">
-	    <h3>States</h3>
-	    <h4>&nbsp;</h4>
-	    <ul class="popover">
-	      {% for state in states|dictsort %}
-	      <H2>{{ state[0] }}</H2>
-	      <UL>
-		{% for city in state[1].cities|sort(attribute='name') %}
-		<LI>{{ city.name }}</LI>
-		{% endfor %}
-	      </UL>
-	      {% endfor %}
-	    </ul>
-	  </div>
+	  	<div class="locations">
+			<h3>States</h3>
+			<h4>&nbsp;</h4>
+			<div class="popover">
+				<ul>
+					{% for state in states|dictsort %}
+					<li>
+						<h2>{{ state[0] }}</h2>
+						<ul>
+							{% for city in state[1].cities|sort(attribute='name') %}
+							<li>{{ city.name }}</li>
+							{% endfor %}
+						</ul>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+	  	</div>
 
 	  <!-- Amenties-->
 
 	  <div class="amenities">
 	    <h3>Amenities</h3>
 	    <h4>&nbsp;</h4>
-	    <ul class="popover">
-	      {% for amenity in amens|sort(attribute='name') %}
-	      <LI><INPUT type="checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}">{{ amenity.name }}</LI>
-	      {% endfor %}
-	    </ul>
+		<div class="popover">
+			<ul>
+			{% for amenity in amens|sort(attribute='name') %}
+			<li><input type="checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}">{{ amenity.name }}</li>
+			{% endfor %}
+			</ul>
+		</div>
 	  </div>
 
 	  <!-- Search button -->
@@ -76,11 +83,11 @@
 	  <button>Search</button>
 	</section>
 
+	<div class="placesh1"><h1>Places</h1></div>
 	<section class="places">
-	  <h1>Places</h1>
 
 	</section>
-      </div>
+    </div>
     </main>
 
     <!-- FOOTER -->
