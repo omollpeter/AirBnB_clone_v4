@@ -11,14 +11,14 @@ header {
 }
 
 #api_status {
+    background-color: #cccccc;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     align-self: center;
     margin-right: 30px;
-    background-color: #cccccc;
 }
 
-.available {
+div#api_status.available {
     background-color: #ff545f;
 }
