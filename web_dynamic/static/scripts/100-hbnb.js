@@ -10,7 +10,7 @@ window.addEventListener('load', function () {
 
   // task 2
   const amenityIds = {};
-  $('input[type=checkbox]').click(function () {
+  $('.amenities .popover ul li input[type=checkbox]').click(function () {
     if ($(this).prop('checked')) {
       amenityIds[$(this).attr('data-id')] = $(this).attr('data-name');
     } else if (!$(this).prop('checked')) {
@@ -64,14 +64,45 @@ window.addEventListener('load', function () {
     }
   });
 
+    let stateIds = {};
+    $('.locations .popover ul li h2 input[type=checkbox]').click(function () {
+      if ($(this).prop('checked')) {
+        stateIds[$(this).attr('data-id')] = $(this).attr('data-name');
+      } else if (!$(this).prop('checked')) {
+        delete stateIds[$(this).attr('data-id')];
+      }
+    });
+
+    let cityIds = {};
+    $('.locations .popover ul li ul li input[type=checkbox]').click(function () {
+      if ($(this).prop('checked')) {
+        cityIds[$(this).attr('data-id')] = $(this).attr('data-name');
+      } else if (!$(this).prop('checked')) {
+        delete cityIds[$(this).attr('data-id')];
+      }
+    });
+
+    // Task 5 and 6
     $(".filters button").click(function() {
-        let amnty_ids = Object.create({});
-        amnty_ids.amenities = Object.keys(amenityIds);
+        let objs = Object.create({});
+        if (stateIds) {
+          objs.states = Object.keys(stateIds);
+        }
+
+        if (cityIds) {
+          objs.cities = Object.keys(cityIds);
+        }
+
+        if (amenityIds) {
+          objs.amenities = Object.keys(amenityIds);
+        }
+        console.log(objs)
+        
         $.ajax({
             type: "POST",
             url: "http://0.0.0.0:5001/api/v1/places_search/",
             contentType: 'application/json',
-            data: JSON.stringify(amnty_ids)
+            data: JSON.stringify(objs)
         }).done(function(data) {
           $('section.places').html("");
           for (const place of data) {

@@ -89,7 +89,7 @@ button:hover {
     margin: 0px;
 }
 
-.amenities .popover ul li input {
+.popover input[type="checkbox"] {
     margin-right: 10px;
 }
 
